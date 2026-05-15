@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# Christian's Summer School ⚾🎮🤼
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An interactive spelling and writing app built for Christian — featuring arcade-style points, a prize store, Home Run Derby review games, and AI-powered sentence grading.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- 📖 Word intro lessons with audio (powered by Claude AI + Web Speech API)
+- ⌨️ Spelling quizzes with 3 tries per word and instant feedback
+- ✍️ Sentence writing graded by Claude AI on spelling + correct usage
+- ⚾ Home Run Derby review game
+- 🎟️ Arcade-style point system with prize redemption store
+- 🔥 Daily streaks with bonus points
+- ⭐ Roblox-style leveling system (Rookie → Legend)
+- ⚡ Extra credit bonus activities
+- 📊 Progress tracker with baseball diamond milestone map
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 1. Clone the repo
+```bash
+git clone https://github.com/tabithablagdon/christians-summer-school.git
+cd christians-summer-school
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 2. Install dependencies
+```bash
+npm install
+```
 
-### `npm test`
+### 3. Set up your API key
+```bash
+cp .env.example .env
+```
+Open `.env` and replace `your_api_key_here` with your [Anthropic API key](https://console.anthropic.com/).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 4. Run the app
+```bash
+npm start
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### `npm run build`
+## Editing the Curriculum
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+All spelling words, definitions, and example sentences live in one file:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+src/config/curriculum.js
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Each word entry looks like this:
+```js
+{
+  word: "train",
+  definition: "A line of connected vehicles that travel on rails.",
+  sentences: [
+    "I rode the train to the city.",
+    "The train whistled as it passed the station.",
+    "We watched the long freight train go by."
+  ]
+}
+```
 
-### `npm run eject`
+To add or change prizes, edit `src/config/prizes.js`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Deploying to GitHub Pages
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm run deploy
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+This builds the app and pushes it to the `gh-pages` branch automatically.  
+Then go to **Settings → Pages** in your GitHub repo and set the source to the `gh-pages` branch.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Your app will be live at:  
+`https://tabithablagdon.github.io/christians-summer-school`
 
-## Learn More
+## Tech Stack
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [React 18](https://react.dev/)
+- [Anthropic Claude API](https://docs.anthropic.com/) — AI grading & natural TTS rewriting
+- [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API) — in-browser text-to-speech
+- [Create React App](https://create-react-app.dev/)
+- [gh-pages](https://github.com/tschaub/gh-pages) — one-command GitHub Pages deployment
