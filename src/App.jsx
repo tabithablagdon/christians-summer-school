@@ -337,18 +337,18 @@ export default function App() {
 
   const S = {
     app:       { fontFamily: "var(--font-sans)", padding: "0 0 40px", maxWidth: 680, margin: "0 auto" },
-    header:    { background: "linear-gradient(135deg, #1a3a5c 0%, #c0392b 100%)", borderRadius: "0 0 16px 16px", padding: "20px 20px 16px", color: "#fff", marginBottom: 16 },
-    hTitle:    { fontSize: 22, fontWeight: 700, margin: 0, letterSpacing: -0.5 },
-    hSub:      { fontSize: 13, opacity: 0.8, margin: "2px 0 12px" },
+    header:    { background: "#ffffff", borderRadius: "0 0 20px 20px", padding: "20px 20px 16px", marginBottom: 16, borderBottom: "3px solid #FD5A1E" },
+    hTitle:    { fontSize: 24, fontWeight: 800, margin: 0, letterSpacing: -0.5, color: "#1a3a5c" },
+    hSub:      { fontSize: 13, color: "#64748b", margin: "2px 0 12px" },
     statRow:   { display: "flex", gap: 10, flexWrap: "wrap" },
-    statCard:  { background: "rgba(255,255,255,0.15)", borderRadius: 10, padding: "8px 14px", flex: 1, minWidth: 90, textAlign: "center" },
-    statNum:   { fontSize: 22, fontWeight: 700, lineHeight: 1 },
-    statLabel: { fontSize: 11, opacity: 0.8, marginTop: 2 },
+    statCard:  { background: "rgba(26, 58, 92, 0.07)", borderRadius: 10, padding: "8px 14px", flex: 1, minWidth: 90, textAlign: "center" },
+    statNum:   { fontSize: 22, fontWeight: 700, lineHeight: 1, color: "#1a3a5c" },
+    statLabel: { fontSize: 11, color: "#64748b", marginTop: 2 },
     card:      { background: "var(--color-background-primary)", border: "0.5px solid var(--color-border-tertiary)", borderRadius: 12, padding: "14px 16px", marginBottom: 10 },
     secTitle:  { fontSize: 13, fontWeight: 500, color: "var(--color-text-secondary)", marginBottom: 10, textTransform: "uppercase", letterSpacing: 0.5 },
     btn:       { background: "var(--color-background-secondary)", border: "0.5px solid var(--color-border-secondary)", borderRadius: 8, padding: "10px 16px", fontSize: 14, cursor: "pointer", color: "var(--color-text-primary)", width: "100%", textAlign: "left", display: "flex", alignItems: "center", gap: 10, marginBottom: 8 },
     btnP:      { background: "#1a3a5c", color: "#fff", border: "none", borderRadius: 8, padding: "12px 20px", fontSize: 15, fontWeight: 500, cursor: "pointer", width: "100%" },
-    btnD:      { background: "#c0392b", color: "#fff", border: "none", borderRadius: 8, padding: "10px 16px", fontSize: 14, cursor: "pointer" },
+    btnD:      { background: "#FD5A1E", color: "#fff", border: "none", borderRadius: 8, padding: "10px 16px", fontSize: 14, cursor: "pointer" },
     input:     { width: "100%", padding: "12px 14px", fontSize: 16, borderRadius: 8, border: "1.5px solid var(--color-border-secondary)", background: "var(--color-background-primary)", color: "var(--color-text-primary)", boxSizing: "border-box" },
     pBar:      { height: 8, borderRadius: 4, background: "var(--color-background-secondary)", overflow: "hidden", marginTop: 6 },
     pFill:     (pct, color) => ({ height: "100%", width: `${pct}%`, background: color || "#1a3a5c", borderRadius: 4, transition: "width 0.5s" }),
@@ -408,7 +408,7 @@ export default function App() {
             <div style={{ fontSize: 12, color: "var(--color-text-secondary)", fontWeight: 500, marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.5 }}>Example sentences</div>
             {wo.sentences.map((s, i) => (
               <div key={i} style={{ display: "flex", gap: 10, marginBottom: 8, alignItems: "flex-start" }}>
-                <span style={{ ...S.badge("#c0392b"), flexShrink: 0, marginTop: 2 }}>{i + 1}</span>
+                <span style={{ ...S.badge("#FD5A1E"), flexShrink: 0, marginTop: 2 }}>{i + 1}</span>
                 <span style={{ fontSize: 14, color: "var(--color-text-primary)", lineHeight: 1.6 }}>{s}</span>
               </div>
             ))}
@@ -444,7 +444,7 @@ export default function App() {
           {quizResults.map((r, i) => (
             <div key={i} style={{ ...S.card, display: "flex", justifyContent: "space-between", padding: "10px 14px" }}>
               <span style={{ fontWeight: 500 }}>{r.word}</span>
-              <span style={{ color: r.correct ? "#27ae60" : "#c0392b", fontSize: 13 }}>{r.correct ? `✓ ${r.tries} ${r.tries === 1 ? "try" : "tries"}` : "✗ missed"}</span>
+              <span style={{ color: r.correct ? "#27ae60" : "#FD5A1E", fontSize: 13 }}>{r.correct ? `✓ ${r.tries} ${r.tries === 1 ? "try" : "tries"}` : "✗ missed"}</span>
             </div>
           ))}
           <div style={{ display: "flex", gap: 10, marginTop: 4 }}>
@@ -456,7 +456,7 @@ export default function App() {
     }
     const wo       = quizWords[quizIndex];
     const triesLeft = 3 - quizTries;
-    const fbBg     = quizFeedback?.correct ? "#27ae60" : quizFeedback?.showAnswer ? "#c0392b" : "#e67e22";
+    const fbBg     = quizFeedback?.correct ? "#27ae60" : quizFeedback?.showAnswer ? "#FD5A1E" : "#FD5A1E";
     return (
       <div style={{ ...S.app, padding: 20 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
@@ -505,8 +505,8 @@ export default function App() {
               </div>
               <div style={{ fontSize: 13, color: "var(--color-text-secondary)", fontStyle: "italic", marginBottom: 6 }}>"{r.sentence}"</div>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                <span style={S.badge(r.spellingCorrect ? "#27ae60" : "#c0392b")}>{r.spellingCorrect ? "✓ Spelling" : "✗ Spelling"}</span>
-                <span style={S.badge(r.usageCorrect   ? "#27ae60" : "#c0392b")}>{r.usageCorrect   ? "✓ Usage"    : "✗ Usage"}</span>
+                <span style={S.badge(r.spellingCorrect ? "#27ae60" : "#FD5A1E")}>{r.spellingCorrect ? "✓ Spelling" : "✗ Spelling"}</span>
+                <span style={S.badge(r.usageCorrect   ? "#27ae60" : "#FD5A1E")}>{r.usageCorrect   ? "✓ Usage"    : "✗ Usage"}</span>
               </div>
               <div style={{ fontSize: 13, color: "var(--color-text-secondary)", marginTop: 8 }}>{r.feedback}</div>
             </div>
@@ -528,7 +528,7 @@ export default function App() {
         </div>
         {sentFeedback ? (
           <div>
-            <div style={{ ...S.card, borderLeft: `4px solid ${sentFeedback.spellingCorrect && sentFeedback.usageCorrect ? "#27ae60" : sentFeedback.spellingCorrect || sentFeedback.usageCorrect ? "#f39c12" : "#c0392b"}`, borderRadius: "0 12px 12px 0" }}>
+            <div style={{ ...S.card, borderLeft: `4px solid ${sentFeedback.spellingCorrect && sentFeedback.usageCorrect ? "#27ae60" : sentFeedback.spellingCorrect || sentFeedback.usageCorrect ? "#FD5A1E" : "#FD5A1E"}`, borderRadius: "0 12px 12px 0" }}>
               <div style={{ fontSize: 15, fontWeight: 500, marginBottom: 8 }}>Your sentence:</div>
               <div style={{ fontSize: 14, fontStyle: "italic", color: "var(--color-text-secondary)", marginBottom: 12 }}>"{sentFeedback.sentence}"</div>
               <div style={{ display: "flex", gap: 10, marginBottom: 12, flexWrap: "wrap" }}>
@@ -618,11 +618,11 @@ export default function App() {
           <div style={{ display: "flex", gap: 6 }}>{[0,1,2].map(i => <span key={i} style={{ fontSize: 20 }}>{i < derbStrikes ? "❌" : "◯"}</span>)}</div>
           <div style={{ fontSize: 12, color: "var(--color-text-secondary)", marginTop: 8 }}>
             Hit progress to home run: {hitsInInning}/{HITS_FOR_HR}
-            <div style={S.pBar}><div style={S.pFill((hitsInInning / HITS_FOR_HR) * 100, "#e67e22")} /></div>
+            <div style={S.pBar}><div style={S.pFill((hitsInInning / HITS_FOR_HR) * 100, "#FD5A1E")} /></div>
           </div>
         </div>
         {derbFeedback && (
-          <div style={{ background: derbFeedback.correct ? "#27ae60" : derbAnim === "out" ? "#c0392b" : "#e67e22", borderRadius: 10, padding: "14px 16px", marginBottom: 12, textAlign: "center", color: "#fff" }}>
+          <div style={{ background: derbFeedback.correct ? "#27ae60" : derbAnim === "out" ? "#FD5A1E" : "#FD5A1E", borderRadius: 10, padding: "14px 16px", marginBottom: 12, textAlign: "center", color: "#fff" }}>
             <div style={{ fontWeight: 700, fontSize: derbFeedback.msg.includes("HOME RUN") ? 22 : 16 }}>{derbFeedback.msg}</div>
             {derbFeedback.showAnswer && <div style={{ marginTop: 6, fontSize: 14 }}>Correct: <strong>{derbFeedback.word}</strong></div>}
           </div>
@@ -645,11 +645,11 @@ export default function App() {
       if (bonusDone) return (
         <div style={{ ...S.app, padding: 20 }}>
           <h2 style={{ color: "var(--color-text-primary)", textAlign: "center" }}>Bonus Quiz Done! ⚡</h2>
-          <div style={{ textAlign: "center", marginBottom: 16 }}><span style={S.badge("#f39c12")}>{bonusResults.filter(r => r.correct).length}/{bonusWords.length} correct</span></div>
+          <div style={{ textAlign: "center", marginBottom: 16 }}><span style={S.badge("#FD5A1E")}>{bonusResults.filter(r => r.correct).length}/{bonusWords.length} correct</span></div>
           {bonusResults.map((r, i) => (
             <div key={i} style={{ ...S.card, display: "flex", justifyContent: "space-between", padding: "10px 14px" }}>
               <span style={{ fontWeight: 500 }}>{r.word}</span>
-              <span style={{ color: r.correct ? "#27ae60" : "#c0392b", fontSize: 13 }}>{r.correct ? "✓" : `✗ "${r.answer}"`}</span>
+              <span style={{ color: r.correct ? "#27ae60" : "#FD5A1E", fontSize: 13 }}>{r.correct ? "✓" : `✗ "${r.answer}"`}</span>
             </div>
           ))}
           <button style={{ ...S.btnP, marginTop: 8 }} onClick={() => setScreen("extraCredit")}>Back</button>
@@ -660,7 +660,7 @@ export default function App() {
         <div style={{ ...S.app, padding: 20 }}>
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 16 }}>
             <button style={S.backBtn} onClick={() => setScreen("extraCredit")}>← Back</button>
-            <span style={S.badge("#f39c12")}>{bonusIdx + 1}/{bonusWords.length}</span>
+            <span style={S.badge("#FD5A1E")}>{bonusIdx + 1}/{bonusWords.length}</span>
           </div>
           <div style={{ ...S.card, textAlign: "center", padding: "24px 20px", marginBottom: 16 }}>
             <p style={{ color: "var(--color-text-secondary)", fontSize: 13 }}>Spell this word:</p>
@@ -753,7 +753,7 @@ export default function App() {
       <div style={{ ...S.header, borderRadius: 0, marginBottom: 0 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div><div style={S.hTitle}>Week {state.currentWeek}: {week.title}</div><div style={S.hSub}>{week.focus}</div></div>
-          <button style={{ background: "rgba(255,255,255,0.2)", border: "none", color: "#fff", borderRadius: 8, padding: "6px 12px", cursor: "pointer" }} onClick={() => setScreen("home")}>← Home</button>
+          <button style={{ background: "rgba(26,58,92,0.1)", border: "none", color: "#1a3a5c", borderRadius: 8, padding: "6px 12px", cursor: "pointer" }} onClick={() => setScreen("home")}>← Home</button>
         </div>
       </div>
       <div style={{ padding: "16px 12px 0" }}>
@@ -785,7 +785,7 @@ export default function App() {
       <div style={{ ...S.header, borderRadius: 0, marginBottom: 0 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div><div style={S.hTitle}>🏆 Prize Store</div><div style={S.hSub}>{state.points.toLocaleString()} pts available</div></div>
-          <button style={{ background: "rgba(255,255,255,0.2)", border: "none", color: "#fff", borderRadius: 8, padding: "6px 12px", cursor: "pointer" }} onClick={() => setScreen("home")}>← Home</button>
+          <button style={{ background: "rgba(26,58,92,0.1)", border: "none", color: "#1a3a5c", borderRadius: 8, padding: "6px 12px", cursor: "pointer" }} onClick={() => setScreen("home")}>← Home</button>
         </div>
       </div>
       <div style={{ padding: "16px 12px 0" }}>
@@ -839,7 +839,7 @@ export default function App() {
       <div style={{ ...S.header, borderRadius: 0, marginBottom: 0 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div><div style={S.hTitle}>⚡ Extra Credit</div><div style={S.hSub}>Earn bonus points anytime!</div></div>
-          <button style={{ background: "rgba(255,255,255,0.2)", border: "none", color: "#fff", borderRadius: 8, padding: "6px 12px", cursor: "pointer" }} onClick={() => setScreen("home")}>← Home</button>
+          <button style={{ background: "rgba(26,58,92,0.1)", border: "none", color: "#1a3a5c", borderRadius: 8, padding: "6px 12px", cursor: "pointer" }} onClick={() => setScreen("home")}>← Home</button>
         </div>
       </div>
       <div style={{ padding: "16px 12px 0" }}>
@@ -847,7 +847,7 @@ export default function App() {
           <button key={a.id} style={{ ...S.btn, flexDirection: "column", alignItems: "flex-start", gap: 4 }} onClick={() => startBonus(a)}>
             <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
               <span style={{ fontWeight: 500 }}>{a.icon} {a.name}</span>
-              <span style={S.badge("#f39c12")}>up to {a.maxPts} pts</span>
+              <span style={S.badge("#FD5A1E")}>up to {a.maxPts} pts</span>
             </div>
             <span style={{ fontSize: 13, color: "var(--color-text-secondary)" }}>{a.desc}</span>
           </button>
@@ -864,7 +864,7 @@ export default function App() {
         <div style={{ ...S.header, borderRadius: 0, marginBottom: 0 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div><div style={S.hTitle}>📊 My Progress</div><div style={S.hSub}>{state.completedDays.length} of 28 days done</div></div>
-            <button style={{ background: "rgba(255,255,255,0.2)", border: "none", color: "#fff", borderRadius: 8, padding: "6px 12px", cursor: "pointer" }} onClick={() => setScreen("home")}>← Home</button>
+            <button style={{ background: "rgba(26,58,92,0.1)", border: "none", color: "#1a3a5c", borderRadius: 8, padding: "6px 12px", cursor: "pointer" }} onClick={() => setScreen("home")}>← Home</button>
           </div>
         </div>
         <div style={{ padding: "16px 12px 0" }}>
@@ -887,7 +887,7 @@ export default function App() {
               <span style={{ fontWeight: 500, fontSize: 16 }}>{lvl.name}</span>
               {nextLvl && <span style={{ fontSize: 13, color: "var(--color-text-secondary)" }}>→ {nextLvl.name}</span>}
             </div>
-            <div style={S.pBar}><div style={S.pFill(lvlPct, "#f39c12")} /></div>
+            <div style={S.pBar}><div style={S.pFill(lvlPct, "#FD5A1E")} /></div>
             <div style={{ fontSize: 12, color: "var(--color-text-tertiary)", marginTop: 4 }}>{lvlPct}% to next level</div>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
@@ -920,16 +920,21 @@ export default function App() {
   return (
     <div style={S.app}>
       <div style={S.header}>
-        <div style={S.hTitle}>Christian's Summer School</div>
-        <div style={S.hSub}>⚾ Baseball · 🎮 Roblox · 🤼 WWE</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 14 }}>
+          <div style={{ fontSize: 52, lineHeight: 1 }}>⚾</div>
+          <div>
+            <div style={S.hTitle}>Christian's Summer School</div>
+            <div style={S.hSub}>Baseball · Roblox · WWE</div>
+          </div>
+        </div>
         <div style={S.statRow}>
           <div style={S.statCard}><div style={S.statNum}>{state.points.toLocaleString()}</div><div style={S.statLabel}>🎟️ Points</div></div>
           <div style={S.statCard}><div style={S.statNum}>{state.streak}</div><div style={S.statLabel}>🔥 Streak</div></div>
           <div style={S.statCard}><div style={S.statNum}>{lvl.name}</div><div style={S.statLabel}>⭐ Level</div></div>
           <div style={S.statCard}><div style={S.statNum}>{state.completedDays.length}</div><div style={S.statLabel}>📅 Days Done</div></div>
         </div>
-        <div style={S.pBar}><div style={S.pFill(lvlPct, "#f39c12")} /></div>
-        <div style={{ fontSize: 11, opacity: 0.7, marginTop: 4 }}>{lvl.name} → {nextLvl?.name || "Legend"} · {lvlPct}%</div>
+        <div style={S.pBar}><div style={S.pFill(lvlPct, "#FD5A1E")} /></div>
+        <div style={{ fontSize: 11, color: "#64748b", marginTop: 4 }}>{lvl.name} → {nextLvl?.name || "Legend"} · {lvlPct}%</div>
       </div>
       <div style={{ padding: "0 12px" }}>
         {state.streak > 0 && state.streak % 3 !== 0 && (
