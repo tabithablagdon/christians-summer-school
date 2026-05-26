@@ -22,4 +22,11 @@ export function getSentenceFeedbackColor(spellingCorrect, usageCorrect) {
   if (spellingCorrect && usageCorrect) return "#27ae60";
   if (spellingCorrect || usageCorrect) return "#FD5A1E";
   return "#1a3a5c";
+  
+export function cancelSpeech(setIsSpeaking) {
+  window.speechSynthesis.cancel();
+  setIsSpeaking(false);
+  
+export function shouldAwardSection(completedSections, secIdx) {
+  return !completedSections.includes(secIdx);
 }
