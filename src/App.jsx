@@ -3,6 +3,7 @@ import { CURRICULUM } from "./config/curriculum";
 import { PRIZES } from "./config/prizes";
 import { speakWord, speakIntroWord } from "./utils/speech";
 import { gradeSentence as gradeWithClaude } from "./utils/ai";
+import { clampWeek } from "./utils/gameHelpers";
 
 const BONUS_ACTIVITIES = [
   { id: "bq", name: "Surprise Spelling Quiz", desc: "Spell 10 random words", maxPts: 250, icon: "⚡" },
@@ -46,8 +47,12 @@ function getLevelProgress(pts){ const l = getLevel(pts); if (l.max === Infinity)
 
 export default function App() {
   const [state, setState] = useState(() => {
-    try { const s = localStorage.getItem("css_state_v2"); return s ? { ...defaultState, ...JSON.parse(s) } : defaultState; }
-    catch { return defaultState; }
+    try {
+      const s = localStorage.getItem("css_state_v2");
+      if (!s) return defaultState;
+      const parsed = JSON.parse(s);
+      return { ...defaultState, ...parsed, currentWeek: clampWeek(parsed.currentWeek, 1, CURRICULUM.length) };
+    } catch { return defaultState; }
   });
   const [screen, setScreen] = useState("home");
   const [activeSection, setActiveSection] = useState(null);
@@ -114,7 +119,7 @@ export default function App() {
 
   const todayStr        = new Date().toDateString();
   const alreadyDoneToday= state.completedDays.includes(todayStr);
-  const week            = CURRICULUM[state.currentWeek - 1];
+  const week            = CURRICULUM[clampWeek(state.currentWeek, 1, CURRICULUM.length) - 1];
 
   useEffect(() => {
     try { localStorage.setItem("css_state_v2", JSON.stringify(state)); } catch {}
