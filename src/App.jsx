@@ -110,6 +110,7 @@ export default function App() {
   const [sentences,    setSentences]    = useState(["", "", ""]);
   const [sentenceDone, setSentenceDone] = useState(false);
   const timerRef = useRef(null);
+  const speedCorrectRef = useRef(0);
 
   const todayStr        = new Date().toDateString();
   const alreadyDoneToday= state.completedDays.includes(todayStr);
@@ -295,7 +296,7 @@ export default function App() {
   const startBonus = (activity) => {
     setBonusScreen(activity.id); setBonusInput(""); setBonusDone(false); setBonusResults([]); setBonusIdx(0);
     if (activity.id === "bq")      { setBonusWords(CURRICULUM.flatMap(w => w.words).sort(() => Math.random() - 0.5).slice(0, 10)); }
-    else if (activity.id === "ss") { setSpeedWords(CURRICULUM.flatMap(w => w.words).sort(() => Math.random() - 0.5)); setSpeedTimer(60); setSpeedCorrect(0); setSpeedWordIdx(0); setSpeedInput(""); setSpeedActive(false); }
+    else if (activity.id === "ss") { setSpeedWords(CURRICULUM.flatMap(w => w.words).sort(() => Math.random() - 0.5)); setSpeedTimer(60); setSpeedCorrect(0); speedCorrectRef.current = 0; setSpeedWordIdx(0); setSpeedInput(""); setSpeedActive(false); }
     else if (activity.id === "sb") { setSentenceWords([...week.words].sort(() => Math.random() - 0.5).slice(0, 5)); setSentences(["", "", ""]); setSentenceDone(false); }
     else if (activity.id === "cw") { setBonusWords([...week.words].sort(() => Math.random() - 0.5).slice(0, 5)); setBonusInput(""); }
     setScreen("bonus");
@@ -315,7 +316,7 @@ export default function App() {
     setSpeedActive(true);
     timerRef.current = setInterval(() => {
       setSpeedTimer(t => {
-        if (t <= 1) { clearInterval(timerRef.current); setSpeedActive(false); setBonusDone(true); awardPoints(Math.min(speedCorrect * 15, 150)); return 0; }
+        if (t <= 1) { clearInterval(timerRef.current); setSpeedActive(false); setBonusDone(true); awardPoints(Math.min(speedCorrectRef.current * 15, 150)); return 0; }
         return t - 1;
       });
     }, 1000);
@@ -324,7 +325,7 @@ export default function App() {
   const submitSpeedWord = () => {
     if (!speedActive) return;
     const wo = speedWords[speedWordIdx % speedWords.length];
-    if (speedInput.trim().toLowerCase() === wo.word.toLowerCase()) setSpeedCorrect(c => c + 1);
+    if (speedInput.trim().toLowerCase() === wo.word.toLowerCase()) setSpeedCorrect(c => { const n = c + 1; speedCorrectRef.current = n; return n; });
     setSpeedWordIdx(i => i + 1); setSpeedInput("");
   };
 
