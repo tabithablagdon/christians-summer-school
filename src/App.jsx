@@ -148,6 +148,7 @@ export default function App() {
   };
 
   const markSectionDone = (secIdx, pts) => {
+    if ((state.todaySectionsCompleted || []).includes(secIdx)) return;
     awardPoints(pts);
     const newCompleted = [...(state.todaySectionsCompleted || []), secIdx];
     setState(s => ({ ...s, todaySectionsCompleted: newCompleted }));
@@ -766,7 +767,7 @@ export default function App() {
         {sections.map((sec, i) => {
           const done = (state.todaySectionsCompleted || []).includes(i);
           return (
-            <button key={i} style={{ ...S.btn, opacity: alreadyDoneToday ? 0.6 : 1, justifyContent: "space-between" }} onClick={() => !alreadyDoneToday && startIntro(i)} disabled={alreadyDoneToday}>
+            <button key={i} style={{ ...S.btn, opacity: (alreadyDoneToday || done) ? 0.6 : 1, justifyContent: "space-between" }} onClick={() => !(alreadyDoneToday || done) && startIntro(i)} disabled={alreadyDoneToday || done}>
               <span>{sectionIcons[i]} {sec}</span>
               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <span style={{ fontSize: 12, color: "var(--color-text-tertiary)" }}>{SECTION_POINTS.perfect[i]} pts max</span>
