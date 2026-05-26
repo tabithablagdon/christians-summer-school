@@ -457,7 +457,7 @@ export default function App() {
     }
     const wo       = quizWords[quizIndex];
     const triesLeft = 3 - quizTries;
-    const fbBg     = quizFeedback?.correct ? "#27ae60" : quizFeedback?.showAnswer ? "#FD5A1E" : "#FD5A1E";
+    const fbBg     = quizFeedback?.correct ? "#27ae60" : quizFeedback?.showAnswer ? "#FD5A1E" : "#1a3a5c";
     return (
       <div style={{ ...S.app, padding: 20 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
@@ -529,7 +529,7 @@ export default function App() {
         </div>
         {sentFeedback ? (
           <div>
-            <div style={{ ...S.card, borderLeft: `4px solid ${sentFeedback.spellingCorrect && sentFeedback.usageCorrect ? "#27ae60" : sentFeedback.spellingCorrect || sentFeedback.usageCorrect ? "#FD5A1E" : "#FD5A1E"}`, borderRadius: "0 12px 12px 0" }}>
+            <div style={{ ...S.card, borderLeft: `4px solid ${sentFeedback.spellingCorrect && sentFeedback.usageCorrect ? "#27ae60" : sentFeedback.spellingCorrect || sentFeedback.usageCorrect ? "#FD5A1E" : "#1a3a5c"}`, borderRadius: "0 12px 12px 0" }}>
               <div style={{ fontSize: 15, fontWeight: 500, marginBottom: 8 }}>Your sentence:</div>
               <div style={{ fontSize: 14, fontStyle: "italic", color: "var(--color-text-secondary)", marginBottom: 12 }}>"{sentFeedback.sentence}"</div>
               <div style={{ display: "flex", gap: 10, marginBottom: 12, flexWrap: "wrap" }}>
