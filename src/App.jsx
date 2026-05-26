@@ -3,6 +3,7 @@ import { CURRICULUM } from "./config/curriculum";
 import { PRIZES } from "./config/prizes";
 import { speakWord, speakIntroWord } from "./utils/speech";
 import { gradeSentence as gradeWithClaude } from "./utils/ai";
+import { nextWeek, prevWeek } from "./utils/gameHelpers";
 
 const BONUS_ACTIVITIES = [
   { id: "bq", name: "Surprise Spelling Quiz", desc: "Spell 10 random words", maxPts: 250, icon: "⚡" },
@@ -907,6 +908,32 @@ export default function App() {
                 <div><div style={{ fontWeight: 500, fontSize: 14 }}>Week {w.week}: {w.title}</div><div style={{ fontSize: 12, color: "var(--color-text-secondary)" }}>{w.focus}</div></div>
               </div>
             ))}
+          </div>
+          <div style={{ ...S.card, marginTop: 10 }}>
+            <div style={S.secTitle}>Parent Controls</div>
+            <div style={{ fontSize: 13, color: "var(--color-text-secondary)", marginBottom: 12 }}>
+              Current week: <strong>Week {state.currentWeek}</strong>
+            </div>
+            <div style={{ display: "flex", gap: 10 }}>
+              <button
+                style={{ ...S.btn, flex: 1, justifyContent: "center" }}
+                disabled={state.currentWeek <= 1}
+                onClick={() => {
+                  if (window.confirm("Move back to Week " + prevWeek(state.currentWeek) + "?")) {
+                    setState(s => ({ ...s, currentWeek: prevWeek(s.currentWeek) }));
+                  }
+                }}
+              >← Previous Week</button>
+              <button
+                style={{ ...S.btnP, flex: 1, justifyContent: "center" }}
+                disabled={state.currentWeek >= CURRICULUM.length}
+                onClick={() => {
+                  if (window.confirm("Advance to Week " + nextWeek(state.currentWeek, CURRICULUM.length) + "?")) {
+                    setState(s => ({ ...s, currentWeek: nextWeek(s.currentWeek, CURRICULUM.length), todaySectionsCompleted: [] }));
+                  }
+                }}
+              >Next Week →</button>
+            </div>
           </div>
           <div style={{ textAlign: "center", marginTop: 16 }}>
             <button style={{ ...S.btn, background: "var(--color-background-danger)", color: "var(--color-text-danger)", border: "0.5px solid var(--color-border-danger)", justifyContent: "center", fontSize: 12, width: "auto", display: "inline-flex" }}
