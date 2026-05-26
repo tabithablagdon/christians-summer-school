@@ -158,6 +158,7 @@ export default function App() {
   };
 
   const markSectionDone = (secIdx, pts) => {
+    if ((state.todaySectionsCompleted || []).includes(secIdx)) return;
     awardPoints(pts);
     const newCompleted = [...(state.todaySectionsCompleted || []), secIdx];
     setState(s => ({ ...s, todaySectionsCompleted: newCompleted }));
@@ -401,7 +402,7 @@ export default function App() {
     return (
       <div style={{ ...S.app, padding: 20 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-          <button style={S.backBtn} onClick={() => { window.speechSynthesis.cancel(); setScreen("lesson"); }}>← Back</button>
+          <button style={S.backBtn} onClick={() => { window.speechSynthesis.cancel(); setIsSpeaking(false); setScreen("lesson"); }}>← Back</button>
           <span style={{ fontSize: 13, color: "var(--color-text-secondary)" }}>Word {introIndex + 1} of {introWords.length}</span>
           <span style={S.badge("#1a3a5c")}>{Math.round((introIndex / introWords.length) * 100)}%</span>
         </div>
@@ -467,11 +468,11 @@ export default function App() {
     }
     const wo       = quizWords[quizIndex];
     const triesLeft = 3 - quizTries;
-    const fbBg     = quizFeedback?.correct ? "#27ae60" : quizFeedback?.showAnswer ? "#FD5A1E" : "#FD5A1E";
+    const fbBg     = quizFeedback?.correct ? "#27ae60" : quizFeedback?.showAnswer ? "#FD5A1E" : "#1a3a5c";
     return (
       <div style={{ ...S.app, padding: 20 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-          <button style={S.backBtn} onClick={() => { window.speechSynthesis.cancel(); setScreen("lesson"); }}>← Back</button>
+          <button style={S.backBtn} onClick={() => { window.speechSynthesis.cancel(); setIsSpeaking(false); setScreen("lesson"); }}>← Back</button>
           <span style={{ fontSize: 14, color: "var(--color-text-secondary)" }}>{sections[activeSection]}</span>
           <span style={S.badge("#1a3a5c")}>{quizIndex + 1}/{quizWords.length}</span>
         </div>
@@ -533,13 +534,13 @@ export default function App() {
     return (
       <div style={{ ...S.app, padding: 20 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-          <button style={S.backBtn} onClick={() => { window.speechSynthesis.cancel(); setScreen("lesson"); }}>← Back</button>
+          <button style={S.backBtn} onClick={() => { window.speechSynthesis.cancel(); setIsSpeaking(false); setScreen("lesson"); }}>← Back</button>
           <span style={{ fontSize: 14, color: "var(--color-text-secondary)" }}>Sentence Writing</span>
           <span style={S.badge("#1a3a5c")}>{sentIndex + 1}/{sentWords.length}</span>
         </div>
         {sentFeedback ? (
           <div>
-            <div style={{ ...S.card, borderLeft: `4px solid ${sentFeedback.spellingCorrect && sentFeedback.usageCorrect ? "#27ae60" : sentFeedback.spellingCorrect || sentFeedback.usageCorrect ? "#FD5A1E" : "#FD5A1E"}`, borderRadius: "0 12px 12px 0" }}>
+            <div style={{ ...S.card, borderLeft: `4px solid ${sentFeedback.spellingCorrect && sentFeedback.usageCorrect ? "#27ae60" : sentFeedback.spellingCorrect || sentFeedback.usageCorrect ? "#FD5A1E" : "#1a3a5c"}`, borderRadius: "0 12px 12px 0" }}>
               <div style={{ fontSize: 15, fontWeight: 500, marginBottom: 8 }}>Your sentence:</div>
               <div style={{ fontSize: 14, fontStyle: "italic", color: "var(--color-text-secondary)", marginBottom: 12 }}>"{sentFeedback.sentence}"</div>
               <div style={{ display: "flex", gap: 10, marginBottom: 12, flexWrap: "wrap" }}>
@@ -609,7 +610,7 @@ export default function App() {
     return (
       <div style={{ ...S.app, padding: 20 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-          <button style={S.backBtn} onClick={() => setScreen("lesson")}>← Back</button>
+          <button style={S.backBtn} onClick={() => { window.speechSynthesis.cancel(); setIsSpeaking(false); setScreen("lesson"); }}>← Back</button>
           <span style={{ fontSize: 16, fontWeight: 600, color: "var(--color-text-primary)" }}>⚾ Home Run Derby</span>
           <span style={S.badge("#1a3a5c")}>{sessionPoints} pts</span>
         </div>
@@ -776,7 +777,7 @@ export default function App() {
         {sections.map((sec, i) => {
           const done = (state.todaySectionsCompleted || []).includes(i);
           return (
-            <button key={i} style={{ ...S.btn, opacity: alreadyDoneToday ? 0.6 : 1, justifyContent: "space-between" }} onClick={() => !alreadyDoneToday && startIntro(i)} disabled={alreadyDoneToday}>
+            <button key={i} style={{ ...S.btn, opacity: (alreadyDoneToday || done) ? 0.6 : 1, justifyContent: "space-between" }} onClick={() => !(alreadyDoneToday || done) && startIntro(i)} disabled={alreadyDoneToday || done}>
               <span>{sectionIcons[i]} {sec}</span>
               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <span style={{ fontSize: 12, color: "var(--color-text-tertiary)" }}>{SECTION_POINTS.perfect[i]} pts max</span>
