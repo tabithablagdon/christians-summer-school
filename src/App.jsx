@@ -392,7 +392,7 @@ export default function App() {
     return (
       <div style={{ ...S.app, padding: 20 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-          <button style={S.backBtn} onClick={() => { window.speechSynthesis.cancel(); setScreen("lesson"); }}>← Back</button>
+          <button style={S.backBtn} onClick={() => { window.speechSynthesis.cancel(); setIsSpeaking(false); setScreen("lesson"); }}>← Back</button>
           <span style={{ fontSize: 13, color: "var(--color-text-secondary)" }}>Word {introIndex + 1} of {introWords.length}</span>
           <span style={S.badge("#1a3a5c")}>{Math.round((introIndex / introWords.length) * 100)}%</span>
         </div>
@@ -462,7 +462,7 @@ export default function App() {
     return (
       <div style={{ ...S.app, padding: 20 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-          <button style={S.backBtn} onClick={() => { window.speechSynthesis.cancel(); setScreen("lesson"); }}>← Back</button>
+          <button style={S.backBtn} onClick={() => { window.speechSynthesis.cancel(); setIsSpeaking(false); setScreen("lesson"); }}>← Back</button>
           <span style={{ fontSize: 14, color: "var(--color-text-secondary)" }}>{sections[activeSection]}</span>
           <span style={S.badge("#1a3a5c")}>{quizIndex + 1}/{quizWords.length}</span>
         </div>
@@ -524,7 +524,7 @@ export default function App() {
     return (
       <div style={{ ...S.app, padding: 20 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-          <button style={S.backBtn} onClick={() => { window.speechSynthesis.cancel(); setScreen("lesson"); }}>← Back</button>
+          <button style={S.backBtn} onClick={() => { window.speechSynthesis.cancel(); setIsSpeaking(false); setScreen("lesson"); }}>← Back</button>
           <span style={{ fontSize: 14, color: "var(--color-text-secondary)" }}>Sentence Writing</span>
           <span style={S.badge("#1a3a5c")}>{sentIndex + 1}/{sentWords.length}</span>
         </div>
@@ -600,7 +600,7 @@ export default function App() {
     return (
       <div style={{ ...S.app, padding: 20 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-          <button style={S.backBtn} onClick={() => setScreen("lesson")}>← Back</button>
+          <button style={S.backBtn} onClick={() => { window.speechSynthesis.cancel(); setIsSpeaking(false); setScreen("lesson"); }}>← Back</button>
           <span style={{ fontSize: 16, fontWeight: 600, color: "var(--color-text-primary)" }}>⚾ Home Run Derby</span>
           <span style={S.badge("#1a3a5c")}>{sessionPoints} pts</span>
         </div>
