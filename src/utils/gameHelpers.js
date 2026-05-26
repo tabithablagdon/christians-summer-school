@@ -1,19 +1,28 @@
 // Pure helper functions extracted for testability
-
 export function calcSpeedPoints(correct) {
   return Math.min(correct * 15, 150);
 }
 
 /**
+ * Returns true if the user missed one or more days since their last login,
+ * meaning the streak should reset to 0.
+ * lastLoginDate uses the same format as new Date().toDateString().
+ */
+export function shouldResetStreak(lastLoginDate, todayStr) {
+  if (!lastLoginDate) return false;
+  const last = new Date(lastLoginDate);
+  const today = new Date(todayStr);
+  const diffDays = Math.round((today - last) / (1000 * 60 * 60 * 24));
+  return diffDays > 1;
  * Returns the background color for quiz feedback banners.
  * correct=true → green, showAnswer=true (max tries exhausted) → orange, else → navy (try again state)
  */
+  
 export function getQuizFeedbackColor(correct, showAnswer) {
   if (correct) return "#27ae60";
   if (showAnswer) return "#FD5A1E";
   return "#1a3a5c";
 }
-
 /**
  * Returns the left-border color for sentence writing feedback.
  * Both correct → green, partial → orange, both wrong → navy
