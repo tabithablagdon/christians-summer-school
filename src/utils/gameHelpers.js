@@ -4,6 +4,15 @@ export function calcSpeedPoints(correct) {
 }
 
 /**
+ * Clamps a week number to the valid range [min, max].
+ * Returns min for any non-finite input (null, undefined, NaN).
+ */
+export function clampWeek(week, min, max) {
+  const n = Number(week);
+  if (!Number.isFinite(n)) return min;
+  return Math.min(Math.max(n, min), max);
+  
+ /**
  * Advances to the next week, clamped to maxWeek.
  */
 export function nextWeek(currentWeek, maxWeek) {
