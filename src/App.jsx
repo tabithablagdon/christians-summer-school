@@ -3,6 +3,7 @@ import { CURRICULUM } from "./config/curriculum";
 import { PRIZES } from "./config/prizes";
 import { speakWord, speakIntroWord } from "./utils/speech";
 import { gradeSentence as gradeWithClaude } from "./utils/ai";
+import { shouldResetStreak } from "./utils/gameHelpers";
 
 const BONUS_ACTIVITIES = [
   { id: "bq", name: "Surprise Spelling Quiz", desc: "Spell 10 random words", maxPts: 250, icon: "⚡" },
@@ -125,7 +126,16 @@ export default function App() {
     if (state.lastLoginDate !== todayStr) {
       const fact = DAILY_FACTS[Math.floor(Math.random() * DAILY_FACTS.length)];
       setNotification({ type: "login", msg: fact });
-      setState(s => ({ ...s, lastLoginDate: todayStr, points: s.points + 25, totalEarned: s.totalEarned + 25, todaySectionsCompleted: [], todayPointsEarned: 0 }));
+      const streakReset = shouldResetStreak(state.lastLoginDate, todayStr);
+      setState(s => ({
+        ...s,
+        lastLoginDate: todayStr,
+        points: s.points + 25,
+        totalEarned: s.totalEarned + 25,
+        todaySectionsCompleted: [],
+        todayPointsEarned: 0,
+        ...(streakReset ? { streak: 0 } : {}),
+      }));
     }
   }, []);
 
