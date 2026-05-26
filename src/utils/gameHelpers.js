@@ -7,4 +7,6 @@ export function calcSpeedPoints(correct) {
 export function cancelSpeech(setIsSpeaking) {
   window.speechSynthesis.cancel();
   setIsSpeaking(false);
+export function shouldAwardSection(completedSections, secIdx) {
+  return !completedSections.includes(secIdx);
 }
