@@ -128,21 +128,23 @@ export default function App() {
 
   useEffect(() => {
     window.speechSynthesis.getVoices();
-    if (state.lastLoginDate !== todayStr) {
-      const fact = DAILY_FACTS[Math.floor(Math.random() * DAILY_FACTS.length)];
-      setNotification({ type: "login", msg: fact });
-      const streakReset = shouldResetStreak(state.lastLoginDate, todayStr);
-      setState(s => ({
-        ...s,
-        lastLoginDate: todayStr,
-        points: s.points + 25,
-        totalEarned: s.totalEarned + 25,
-        todaySectionsCompleted: [],
-        todayPointsEarned: 0,
-        ...(streakReset ? { streak: 0 } : {}),
-      }));
-    }
   }, []);
+
+  useEffect(() => {
+    if (state.lastLoginDate === todayStr) return;
+    const fact = DAILY_FACTS[Math.floor(Math.random() * DAILY_FACTS.length)];
+    setNotification({ type: "login", msg: fact });
+    const streakReset = shouldResetStreak(state.lastLoginDate, todayStr);
+    setState(s => ({
+      ...s,
+      lastLoginDate: todayStr,
+      points: s.points + 25,
+      totalEarned: s.totalEarned + 25,
+      todaySectionsCompleted: [],
+      todayPointsEarned: 0,
+      ...(streakReset ? { streak: 0 } : {}),
+    }));
+  }, [state.lastLoginDate, todayStr]);
 
   const awardPoints = (pts) => {
     setState(s => ({ ...s, points: s.points + pts, totalEarned: s.totalEarned + pts, todayPointsEarned: s.todayPointsEarned + pts }));
