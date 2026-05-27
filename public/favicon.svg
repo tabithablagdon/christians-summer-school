@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Ball -->
+  <circle cx="16" cy="16" r="15" fill="#FFFEF5" stroke="#D4C9A0" stroke-width="1"/>
+  <!-- Left seam -->
+  <path d="M11,2 C5.5,8 5.5,24 11,30" fill="none" stroke="#CC1111" stroke-width="2.2" stroke-linecap="round"/>
+  <!-- Right seam -->
+  <path d="M21,2 C26.5,8 26.5,24 21,30" fill="none" stroke="#CC1111" stroke-width="2.2" stroke-linecap="round"/>
+  <!-- Left stitch ticks -->
+  <line x1="8.5" y1="9"  x2="11.5" y2="10.5" stroke="#CC1111" stroke-width="1" stroke-linecap="round"/>
+  <line x1="7.5" y1="13" x2="10.5" y2="14"   stroke="#CC1111" stroke-width="1" stroke-linecap="round"/>
+  <line x1="7.5" y1="17" x2="10.5" y2="18"   stroke="#CC1111" stroke-width="1" stroke-linecap="round"/>
+  <line x1="8.5" y1="21" x2="11.5" y2="22.5" stroke="#CC1111" stroke-width="1" stroke-linecap="round"/>
+  <!-- Right stitch ticks -->
+  <line x1="23.5" y1="9"  x2="20.5" y2="10.5" stroke="#CC1111" stroke-width="1" stroke-linecap="round"/>
+  <line x1="24.5" y1="13" x2="21.5" y2="14"   stroke="#CC1111" stroke-width="1" stroke-linecap="round"/>
+  <line x1="24.5" y1="17" x2="21.5" y2="18"   stroke="#CC1111" stroke-width="1" stroke-linecap="round"/>
+  <line x1="23.5" y1="21" x2="20.5" y2="22.5" stroke="#CC1111" stroke-width="1" stroke-linecap="round"/>
+</svg>
